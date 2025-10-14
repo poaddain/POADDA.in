@@ -13,7 +13,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      background: radial-gradient(circle at top left, #e8f5e9, #c8e6c9, #a5d6a7);
       overflow-x: hidden;
       min-height: 100vh;
       scroll-behavior: smooth;
@@ -41,13 +41,13 @@
       width: 160px;
       height: 160px;
       animation: pulse 3s infinite ease-in-out;
-      filter: drop-shadow(0 0 10px rgba(21, 101, 192, 0.4));
+      filter: drop-shadow(0 0 10px rgba(56, 142, 60, 0.4));
     }
 
     .caption {
       font-size: 1.6rem;
       font-weight: 500;
-      color: #0d47a1;
+      color: #1b5e20;
       margin-top: 12px;
       letter-spacing: 1px;
     }
@@ -77,13 +77,13 @@
 
     .news-section:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(13,71,161,0.2);
+      box-shadow: 0 10px 25px rgba(56,142,60,0.2);
     }
 
     .news-header {
       font-size: 1.3rem;
       font-weight: 600;
-      color: #0d47a1;
+      color: #1b5e20;
       margin-bottom: 12px;
     }
 
@@ -110,33 +110,76 @@
 
     /* ===== TEST ZONE ===== */
     .test-zone {
+      width: 85%;
+      margin: 80px auto 0;
+      padding: 70px 40px;
       text-align: center;
-      margin-top: 70px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 60px rgba(76, 175, 80, 0.35),
+                  inset 0 0 30px rgba(129, 199, 132, 0.25);
+      position: relative;
+      transition: all 0.6s ease-in-out;
+      overflow: hidden;
+    }
+
+    .test-zone::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(76,175,80,0.3) 0%, transparent 70%);
+      transform: rotate(45deg);
+      animation: glowmove 8s linear infinite;
+      z-index: 0;
+      pointer-events: none; /* ✅ ensures clicks work */
+    }
+
+    @keyframes glowmove {
+      0% { transform: rotate(0deg); opacity: 0.7; }
+      50% { transform: rotate(180deg); opacity: 1; }
+      100% { transform: rotate(360deg); opacity: 0.7; }
+    }
+
+    .test-zone:hover {
+      box-shadow: 0 0 90px rgba(76, 255, 120, 0.7),
+                  0 0 40px rgba(0, 255, 150, 0.3);
+      transform: scale(1.03);
     }
 
     .test-zone h2 {
-      color: #0d47a1;
-      font-size: 1.8rem;
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+      color: #004d40;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
     }
 
     .enter-btn {
-      background: linear-gradient(45deg, #1565c0, #42a5f5);
-      color: white;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #00c853, #69f0ae);
+      color: #00210e;
       border: none;
-      padding: 20px 45px;
-      border-radius: 30px;
+      padding: 20px 70px;
+      border-radius: 40px;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-weight: 600;
       transition: 0.4s;
-      box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 150, 0.6);
     }
 
     .enter-btn:hover {
-      background: linear-gradient(45deg, #0d47a1, #1976d2);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+      background: linear-gradient(90deg, #00e676, #a7ffeb);
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 0 60px rgba(0, 255, 150, 0.9);
     }
 
     /* ===== OFFER SECTIONS ===== */
@@ -158,16 +201,16 @@
       padding: 30px;
       min-height: 370px;
       transition: all 0.5s ease;
-      border: 1px solid rgba(13,71,161,0.15);
+      border: 1px solid rgba(56,142,60,0.15);
     }
 
     .offer-box:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 10px 25px rgba(13,71,161,0.2);
+      box-shadow: 0 10px 25px rgba(56,142,60,0.25);
     }
 
     .offer-box h3 {
-      color: #0d47a1;
+      color: #1b5e20;
       font-size: 1.4rem;
       margin-bottom: 15px;
       position: relative;
@@ -178,7 +221,7 @@
       display: block;
       width: 60px;
       height: 3px;
-      background: #1565c0;
+      background: #43a047;
       border-radius: 2px;
       margin-top: 5px;
     }
@@ -190,7 +233,7 @@
     }
 
     .offer-box a {
-      color: #1565c0;
+      color: #2e7d32;
       font-weight: 600;
       text-decoration: none;
     }
@@ -202,7 +245,7 @@
     /* ===== CONTACT SECTION ===== */
     .contact-section {
       width: 100%;
-      background: linear-gradient(135deg, #0d47a1, #1565c0);
+      background: linear-gradient(135deg, #1b5e20, #2e7d32);
       color: white;
       margin-top: 80px;
       text-align: center;
@@ -221,7 +264,7 @@
     }
 
     .social-links a {
-      color: #ffeb3b;
+      color: #c8e6c9;
       margin: 0 10px;
       text-decoration: none;
       font-weight: 600;
@@ -251,7 +294,7 @@
   <!-- LOGO + CAPTION -->
   <div class="logo-container fade-up">
     <img src="logo.png" alt="POADDA Logo">
-    <div class="caption">A journey towards excellence</div>
+    <div class="caption">POADDA - A journey towards excellence</div>
   </div>
 
   <!-- NEWS SECTION -->
@@ -262,10 +305,12 @@
     </div>
   </div>
 
-  <!-- TEST ZONE -->
+  <!-- TEST ZONE (Elegant Bright Neon Glass Effect) -->
   <div class="test-zone fade-up">
     <h2>Enter your Test Zone</h2>
-    <button class="enter-btn" onclick="window.location.href='home.html'">Enter</button>
+    <button class="enter-btn" onclick="window.location.href='https://poaddain.github.io/POADDA.in/'">
+      Enter
+    </button>
   </div>
 
   <!-- OFFERS & EXAM INFO -->
@@ -275,10 +320,10 @@
       <p><b>Register for full practice tests with just Rs.1500/-</b></p>
       <p>You can give tests for all the chapters of <b>Paper 1</b>, <b>Paper 2</b>, and <b>3 full Paper tests</b> with All India Ranking.  
       <a href="premium.html">For more, click here</a></p>
-      <hr style="margin: 15px 0; border: none; height: 1px; background: #90caf9;">
-      <p><b>Register for full practice set for Paper 1 & Paper 3</b> – total 3 tests with just Rs.600/-</p>
+      <hr style="margin: 15px 0; border: none; height: 1px; background: #a5d6a7;">
+      <p><b>Register for All India Ranking Tests</b> – total 3 tests with just Rs.600/-</p>
       <p>You can register for a single test (Paper 1 & Paper 3) with Rs.300/-</p>
-	<a href="premium.html">For more, click here</a></p>
+      <a href="premium.html">For more, click here</a>
     </div>
 
     <div class="offer-box fade-up">
@@ -293,8 +338,8 @@
   <!-- CONTACT SECTION -->
   <div class="contact-section fade-up">
     <h3>Contact Us</h3>
-    <p>Email: <a href="mailto:info@poadda.in" style="color:#ffeb3b;">info@poadda.in</a></p>
-    <p>Phone: <a href="tel:+919812345678" style="color:#ffeb3b;">+91 98123 45678</a></p>
+    <p>Email: <a href="mailto:info@poadda.in" style="color:#c8e6c9;">info@poadda.in</a></p>
+    <p>Phone: <a href="tel:+919812345678" style="color:#c8e6c9;">+91 98123 45678</a></p>
     <div class="social-links">
       <a href="#">Facebook</a> |
       <a href="#">Twitter</a> |
