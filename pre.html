@@ -282,10 +282,15 @@
     </div>
 
     <div style="text-align: center;">
-      <button class="back-btn" onclick="openExitModal()">
-        <i class="fas fa-arrow-left"></i> Back
-      </button>
-    </div>
+  <button class="back-btn" onclick="openExitModal()">
+    <i class="fas fa-arrow-left"></i> Back
+  </button>
+
+  <button class="back-btn" style="background:rgba(255,80,80,0.3);" onclick="confirmExitNow()">
+    <i class="fas fa-times"></i> Close
+  </button>
+</div>
+
 
     <footer>
       <p>© 2025 Home Portal. All rights reserved.</p>
@@ -296,7 +301,7 @@
   <div class="modal-overlay" id="exitModal">
     <div class="modal">
       <h3>Are you want to Exit?</h3>
-      <button class="btn-yes" onclick="navigateTo('poadda.html')">Yes</button>
+      <button class="btn-yes" onclick="navigateTo('poadda1.html')">Yes</button>
       <button class="btn-no" onclick="closeExitModal()">No</button>
     </div>
   </div>
@@ -346,6 +351,21 @@
         block.style.animationDelay = `${index * 0.15}s`;
       });
     });
+
+	function confirmExitNow() {
+  const confirmClose = confirm("Do you really want to close this page?");
+  if (confirmClose) {
+    if (navigator.app) {
+      navigator.app.exitApp();
+    } else if (navigator.device) {
+      navigator.device.exitApp();
+    } else {
+      window.open('', '_self');
+      window.close();
+    }
+  }
+}
+
   </script>
 </body>
 </html>
