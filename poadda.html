@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POADDA - A Journey Toward Excellence</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #e8f0ff, #ffffff, #f4f9ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      animation: fadeSlideDown 1.2s ease-out;
+    }
+
+    header img {
+      width: 100px;
+      height: auto;
+      animation: fadeIn 1.5s ease;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-top: 10px;
+      color: #004aad;
+      animation: fadeIn 1.8s ease;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #555;
+      animation: fadeIn 2s ease;
+    }
+
+    .section {
+      width: 60%;
+      margin: 50px 0 50px 5%;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section img {
+      width: 180px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .section-content h3 {
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+
+    .section-content p {
+      color: #555;
+    }
+
+    /* Fixed Right Panel */
+    .career-panel {
+      position: fixed;
+      top: 120px;
+      right: 0;
+      width: 35%;
+      height: calc(100% - 140px);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(15px);
+      border-radius: 20px 0 0 20px;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      color: #003366;
+      animation: fadeSlideLeft 1.2s ease-out;
+      overflow-y: auto;
+    }
+
+    .career-panel h2 {
+      font-size: 1.8em;
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+
+    .career-panel h4 {
+      font-weight: normal;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .career-panel .card {
+      background: rgba(255,255,255,0.4);
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .career-panel .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .career-panel .highlight {
+      font-weight: 600;
+      color: #004aad;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: #004aad;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideLeft {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 900px) {
+      .section {
+        width: 90%;
+        margin: 20px auto;
+      }
+      .career-panel {
+        position: relative;
+        width: 90%;
+        margin: 20px auto;
+        border-radius: 20px;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="POADDA Logo">
+    <h1>POADDA</h1>
+    <p>A journey toward excellence</p>
+  </header>
+
+  <section class="section" id="savings-bank">
+    <img src="finance.jpg" alt="Savings Bank">
+    <div class="section-content">
+      <h3>Savings Bank</h3>
+      <p>Secure and grow your savings with our trusted postal banking services.</p>
+    </div>
+  </section>
+
+  <section class="section" id="insurance">
+    <img src="insurance.jpg" alt="Postal Life Insurance">
+    <div class="section-content">
+      <h3>Postal Life Insurance</h3>
+      <p>Providing dependable and affordable insurance solutions for all.</p>
+    </div>
+  </section>
+
+  <section class="section" id="parcel-letter">
+    <img src="parcel.jpg" alt="Parcel and Letter">
+    <div class="section-content">
+      <h3>Parcel & Letter (Speed Post)</h3>
+      <p>Fast and reliable postal services for all your delivery needs.</p>
+    </div>
+  </section>
+
+  <section class="section" id="philately">
+    <img src="philately.jpg" alt="Philately">
+    <div class="section-content">
+      <h3>Philately</h3>
+      <p>Celebrate history and art through the world of stamps and collections.</p>
+    </div>
+  </section>
+
+  <div class="career-panel">
+    <h2>Your career our care</h2>
+    <h4>Enroll today for more practice</h4>
+
+    <div class="card" onclick="window.location.href='practice.html'">
+      <strong>For all subject practice Test of IP - Rs.1500/-</strong>
+      <p>Topic-wise Test series, evaluation of your progress.</p>
+    </div>
+
+    <p class="highlight">All India Ranking Test series is Free with this.</p>
+    <p>Paper 1 & Paper 3 MCQ test series with All India Ranking - 3 Tests.</p>
+
+    <div class="card" onclick="window.location.href='testseries.html'">
+      <strong>All India Ranking Test Series - Rs.500/- for 3 Tests</strong>
+      <p>or each Test Rs.250/-</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 POADDA. All Rights Reserved.</p>
+    <p>Contact: info@poadda.in</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

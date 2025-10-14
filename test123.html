@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #f9d423, #ff4e50);
+      overflow-x: hidden;
+    }
+
+    .logo {
+      width: 120px;
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #fff;
+      text-align: center;
+      margin: 10px 0 25px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .glass-container {
+      width: 90%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 25px 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #210909;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .welcome {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #210909;
+      font-weight: 500;
+    }
+
+    #cardContainer1, #cardContainer2 {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      cursor: pointer;
+      color: #210909;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #loading {
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: background 0.25s ease;
+      margin-bottom: 35px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <img src="logo.png" alt="PoADDA Logo" class="logo">
+
+  <!-- Heading -->
+  <h1>Dashboard</h1>
+
+  <!-- Glass container 1 -->
+  <div class="glass-container" id="container1">
+    <div id="welcome" class="welcome">Welcome, <span id="studentName">User</span></div>
+    <div id="loading">Loading your details...</div>
+    <div id="cardContainer1"></div>
+  </div>
+
+  <!-- Glass container 2 (only shows if data present) -->
+  <div class="glass-container" id="container2" style="display:none;">
+    <div id="cardContainer2"></div>
+  </div>
+
+  <!-- Back button under cards -->
+  <button class="back-btn" onclick="window.location.href='ipo.html'">
+    <i class="fa-solid fa-arrow-left"></i> Back
+  </button>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyhPiqlzj84z7OVoGeOkDD3Xi6vqGlfMZaC9InxuA2__0sm1HdaMjjs9FVA8G_uMefL/exec"; // Replace with your deployed Apps Script URL
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const mobile = localStorage.getItem("mobile");
+      if (!mobile) {
+        alert("No mobile number found! Redirecting to login...");
+        window.location.href = "index.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${scriptURL}?mobile=${mobile}`);
+        const data = await res.json();
+        const nameEl = document.getElementById("studentName");
+        const loadingEl = document.getElementById("loading");
+        const container1 = document.getElementById("cardContainer1");
+        const container2 = document.getElementById("cardContainer2");
+        const glass2 = document.getElementById("container2");
+
+        loadingEl.style.display = "none";
+
+        if (!data.success || !data.found) {
+          nameEl.textContent = "Unknown User";
+          container1.innerHTML = "<p>No records found.</p>";
+          return;
+        }
+
+        nameEl.textContent = data.data.name || "Student";
+
+        const cards1 = data.data.cards1 || [];
+        const cards2 = data.data.cards2 || [];
+
+        if (cards1.length === 0) container1.innerHTML = "<p>No items available.</p>";
+        if (cards2.length > 0) glass2.style.display = "block"; // show only if F–H present
+
+        const makeCard = (title, target) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.textContent = title;
+          card.onclick = () => {
+            localStorage.setItem("selectedCardTitle", title);
+            window.location.href = `${title.toLowerCase().replace(/\s+/g, '')}.html`;
+          };
+          target.appendChild(card);
+        };
+
+        cards1.forEach(title => makeCard(title, container1));
+        cards2.forEach(title => makeCard(title, container2));
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("loading").textContent = "Error loading data.";
+      }
+    });
+  </script>
+
+</body>
+</html>
