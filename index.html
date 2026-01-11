@@ -1,174 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Splash - POAdda App</title>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POADDA - A Journey Towards Excellence</title>
 
-    body {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(270deg, #ff512f, #dd2476, #24c6dc, #514a9d);
-      background-size: 800% 800%;
-      animation: gradientFlow 15s ease infinite;
-      color: #fff;
-      overflow: hidden;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      animation: fadeInDown 1.2s ease-out;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Mukta",sans-serif}
+body{background:#ffffff}
 
-    /* Logo with glowing pulse */
-    .logo-wrapper {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-    }
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(135deg,#0b6b3a,#16a34a,#22c55e,#0ea5a4);
+  padding:55px 20px;
+  text-align:center;
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 60%);
+  animation:rotateGlow 12s linear infinite;
+}
+@keyframes rotateGlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-    .logo-wrapper img {
-      width: 220px;
-      height: 220px;
-      object-fit: contain;
-      animation: zoomIn 1.5s ease-in-out;
-      position: relative;
-      z-index: 2;
-    }
+.logo img{
+  width:150px;
+  animation:pulse 3s infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 
-    .logo-wrapper::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulseGlow 3s ease-in-out infinite;
-      z-index: 1;
-    }
+.caption{
+  margin-top:18px;
+  font-family:'Libre Baskerville', serif;
+  font-size:2.4rem;
+}
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top: 4px solid #ffeb3b;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 1.4rem;
-      box-shadow: 0 0 15px rgba(255, 235, 59, 0.7);
-    }
+/* ================= MAIN ================= */
+.main-container{
+  width:92%;
+  margin:60px auto;
+  display:flex;
+  gap:35px;
+}
 
-    p {
-      font-size: 1.1rem;
-      text-align: center;
-      max-width: 340px;
-      line-height: 1.5;
-      animation: fadeInUp 1.5s ease-out;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+/* ================= NEWS ================= */
+.news-box{
+  flex:2;
+  padding:30px;
+  border-radius:20px;
+  border:3px solid #00cfa5;
 
-    .version {
-      position: absolute;
-      bottom: 15px;
-      font-size: 0.9rem;
-      opacity: 0.9;
-      font-weight: 500;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
+ box-shadow:
+    0 0 25px rgba(0,255,200,0.8),
+    0 0 20px rgba(0,255,200,0.6);
 
-    /* Animations */
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  animation:newsGlow 2.5s ease-in-out infinite alternate;
+}
+ 
+.news-box h2{margin-bottom:10px}
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ================= FEATURES ================= */
+.features-box{
+  flex:1;
+  padding:30px;
+  border-radius:18px;
+  border:3px solid #00cfa5;
+}
+.features-box ul{list-style:none}
+.features-box li{
+  padding:12px 0;
+  font-weight:600;
+  transition:.4s;
+}
+.features-box li:hover{
+  transform:translateX(8px);
+  color:#1b5e20;
+}
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ================= SECTION TITLE ================= */
+.section-title{
+  width:92%;
+  margin:80px auto 40px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.section-title::before,
+.section-title::after{
+  content:"";
+  flex:1;
+  height:3px;
+  background:linear-gradient(to right,transparent,#1e88e5,transparent);
+}
 
-    @keyframes zoomIn {
-      from { transform: scale(0.7); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+/* ================= ASPIRANTS ================= */
+.aspirants-container{
+  width:92%;
+  margin:0 auto 80px;
+  display:flex;
+  gap:35px;
+}
+.aspirants-box{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  border:4px solid #1e88e5;
+  transition:.4s;
+}
+.aspirants-box:hover{transform:translateY(-6px)}
+.wide-box{flex:1.6}
+.normal-box{flex:1}
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+/* ================= PREPARATION ZONE BUTTON ================= */
+.study-zone{
+  text-align:center;
+  margin:90px 0 60px;
+}
+.study-zone a{
+  display:inline-block;
+  padding:26px 70px;
+  font-size:1.7rem;
+  font-weight:900;
+  color:#ffffff;
+  text-decoration:none;
+  border-radius:70px;
+  background:linear-gradient(135deg,#1e88e5,#00cfa5);
+  box-shadow:
+    0 0 25px rgba(0,200,255,0.8),
+    0 0 60px rgba(0,255,200,0.6);
+  animation:pulseBtn 2.5s infinite;
+  transition:.4s ease;
+}
+.study-zone a:hover{
+  transform:scale(1.12);
+  box-shadow:
+    0 0 40px rgba(0,200,255,1),
+    0 0 90px rgba(0,255,200,1);
+}
 
-    @keyframes pulseGlow {
-      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.2; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-    }
+@keyframes pulseBtn{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
 
-    /* Floating bubbles for modern feel */
-    .bubble {
-      position: absolute;
-      bottom: -100px;
-      width: 20px;
-      height: 20px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50%;
-      animation: rise 12s infinite ease-in;
-      backdrop-filter: blur(4px);
-    }
-    .bubble:nth-child(1) { left: 20%; width: 18px; height: 18px; animation-duration: 9s; }
-    .bubble:nth-child(2) { left: 40%; width: 28px; height: 28px; animation-duration: 13s; }
-    .bubble:nth-child(3) { left: 60%; width: 15px; height: 15px; animation-duration: 10s; }
-    .bubble:nth-child(4) { left: 80%; width: 22px; height: 22px; animation-duration: 12s; }
+/* ================= OUR OFFER ================= */
+.offer-section{
+  width:92%;
+  margin:80px auto 180px; /* increased bottom space */
+}
 
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 0.6; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
-    }
-  </style>
+.offer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+}
+/* ================= OUR OFFER (UPDATED DESIGN) ================= */
+.offer-card{
+  padding:15px;
+  text-align:center;
+  border-radius:20px;
+  font-weight:800;
+  background:#ffffff;
+  cursor:pointer;
+  transition:.4s;
+  border:2px solid #00cfa5;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.offer-card img{
+  width:100%;
+  height:150px;
+  object-fit:contain;
+  border-radius:14px;
+  margin-bottom:15px;
+}
+
+.offer-card span{
+  display:block;
+  font-size:1.2rem;
+  color:#0b6b3a;
+}
+
+.offer-card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  background:#e0f2f1;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#0b6b3a;
+  color:white;
+  padding:40px 20px;
+  text-align:center;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .main-container,.aspirants-container{flex-direction:column}
+}
+.section-divider{
+  width:80%;
+  height:3px;
+  margin:60px auto;
+  background:linear-gradient(to right, transparent, #00cfa5, #1e88e5, transparent);
+  border-radius:10px;
+}
+
+</style>
 </head>
+
 <body>
-  <h1>Welcome to POAdda App</h1>
-  <div class="logo-wrapper">
-    <img src="logo1.png" alt="POAdda Logo">
+
+<header>
+  <div class="logo">
+    <img src="logo.png">
   </div>
-  <div class="spinner"></div>
-  <p>For all your need in update and career in India Post</p>
-  <div class="version">v 1.2</div>
+  <div class="caption">POADDA – A Journey Towards Excellence</div>
+</header>
 
-  <!-- floating bubbles -->
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
+<div class="main-container">
 
-  <script>
-    // Redirect after 4 seconds
-    setTimeout(() => {
-      window.location.href = "pre.html";
-    }, 4000);
-  </script>
+  <div class="news-box">
+    <h2>News & Updates</h2>
+    <p>Stay updated with the latest departmental exam notifications, test launches, and important announcements.</p>
+  </div>
+
+  <div class="features-box">
+    <h2>Our Features</h2>
+    <ul>
+      <li>📘 Concept-focused Detailed Notes</li>
+      <li>📝 Chapter-wise Practice Tests</li>
+      <li>📄 Full Length Mock Tests (Exam Pattern Based)</li>
+      <li>📊 Smart Student Performance Dashboard</li>
+      <li>⚡ Simple, Fast & Easy-to-Access Platform</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="section-title">
+  <h2>Aspirants’ Guidance</h2>
+</div>
+
+<div class="aspirants-container">
+
+  <div class="aspirants-box wide-box">
+    <h3>Know your Scope in Department of Post</h3>
+    <ul>
+      <li>✔ Clear career growth pathways</li>
+      <li>✔ Departmental & promotional examinations</li>
+      <li>✔ Long-term stability and opportunities</li>
+    </ul>
+  </div>
+
+  <div class="aspirants-box normal-box">
+    <h3>Exam Schedule 2026</h3>
+    <ul>
+      <li>MTS Examination</li>
+      <li>Postman / Mail Guard Examination</li>
+      <li>Postal Assistant Examination</li>
+      <li>Inspector of Posts Examination</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="study-zone">
+  <a href="https://poaddain.github.io/POADDA.in/pre.html">
+    Enter your Preparation Zone 🚀
+  </a>
+</div>
+
+<div class="offer-section">
+  <div class="section-title">
+    <h2>Our Offer</h2>
+  </div>
+
+  <div class="offer-grid">
+  <div class="offer-card" onclick="location.href='mts.html'">
+    <img src="mts.png" alt="MTS Exam">
+    <span>MTS Exam</span>
+  </div>
+
+  <div class="offer-card" onclick="location.href='postman.html'">
+    <img src="postman.png" alt="Postman Exam">
+    <span>Postman Exam</span>
+  </div>
+
+  <div class="offer-card" onclick="location.href='pa.html'">
+    <img src="pasa.png" alt="PA / SA Exam">
+    <span>PA / SA Exam</span>
+  </div>
+
+  <div class="offer-card" onclick="location.href='ip.html'">
+    <img src="ipo.png" alt="IPO Exam">
+    <span>Inspector of Posts</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<footer>
+  <h3>Contact Us</h3>
+  <p>Email: support@poadda.in | Mobile: +91-XXXXXXXXXX</p>
+</footer>
+
 </body>
 </html>
