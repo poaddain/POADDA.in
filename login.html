@@ -139,14 +139,14 @@
       <select name="exam" required>
         <option value="">Select your exam</option>
         <option value="IPO">IPO</option>
-        <option value="AAO">AAO</option>
         <option value="PA/SA">PA/SA</option>
+	<option value="POSTMAN">POSTMAN</option>
+	<option value="MTS">MTS</option>
       </select>
 
       <button type="submit" id="loginBtn">Login</button>
 
-      <div class="links">
-        <a href="user.html">⬅ Back</a> | 
+      <div class="links"> 
         <a href="forgot.html">Forgot Password?</a>
       </div>
     </form>
@@ -187,9 +187,10 @@
           showNotifier("Login Successful ✅", "success");
           setTimeout(() => {
             localStorage.setItem("mobile", data.mobile);
-            if (data.exam === "IPO") window.location.href = "profileip.html";
-            else if (data.exam === "AAO") window.location.href = "aao.html";
-            else if (data.exam === "PA/SA") window.location.href = "pasa.html";
+            if (data.exam === "IPO") window.location.href = "dash.html";
+            else if (data.exam === "POSTMAN") window.location.href = "dashpm.html";
+            else if (data.exam === "PA/SA") window.location.href = "dashpa.html";
+	    else if (data.exam === "MTS") window.location.href = "dashmts.html";
           }, 2000);
         } else {
           showNotifier("❌ Invalid Mobile No, Password, or Exam!", "warning");
@@ -204,5 +205,3 @@
   </script>
 </body>
 </html>
-
-
