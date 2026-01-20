@@ -104,7 +104,7 @@
   </style>
 </head>
 <body>
-  <!-- Logo -->
+
   <img src="logo.png" alt="Logo" class="logo">
 
   <header>
@@ -118,22 +118,25 @@
     <div class="card" onclick="goToPage('ipop3.html')">📄 Paper 3</div>
   </div>
 
-  <!-- Back button -->
   <button class="back-btn" onclick="location.href='test123.html'">⬅ Back</button>
 
   <script>
-    // Show mobile number under title
+    // Show NAME instead of mobile & store for next pages
     window.onload = () => {
-      let mobile = localStorage.getItem("mobile");
-      if (mobile) {
-        document.getElementById("mobileDisplay").innerText = "📱 " + mobile;
+      let name = localStorage.getItem("name");
+
+      if (name) {
+        document.getElementById("mobileDisplay").innerText = "👤 " + name;
+        localStorage.setItem("username", name); // for next pages
       } else {
-        document.getElementById("mobileDisplay").innerText = "📱 Not logged in";
+        document.getElementById("mobileDisplay").innerText = "👤 Not logged in";
       }
     };
+
     function goToPage(page) {
       window.location.href = page;
     }
   </script>
+
 </body>
 </html>
