@@ -48,12 +48,19 @@
       text-align:center;
     }
     .grid {
-      display:grid;
-      grid-template-columns:1fr;  repeat(4, 3fr); /* side by side */
-      gap:16px;
-      width:100%;
-      max-width:1480px;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 3fr); /* side by side */
+  gap: 16px;
+  width: 100%;
+  max-width: 1400px;
+}
+ @media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
     .card {
       background: var(--card);
       border-radius:20px;
@@ -138,7 +145,7 @@
 
   <div class="grid" id="sheetCards" style="display:none;"></div>
 
-  <button class="back-btn" onclick="location.href='promember.html'">⬅ Back</button>
+  <button class="back-btn" onclick="location.href='ipo.html'">⬅ Back</button>
 
   <script>
     const API_BASE = "https://script.google.com/macros/s/AKfycbzW5KjSBiOxgfX4ZU1D8ipaawdfVEpWNbxzUgLTS7Uh4O9rR4wpLzx1m-NDDU2BQ33A/exec";
@@ -148,8 +155,17 @@
     const loading = document.getElementById("loading");
 
     window.onload = async () => {
-      let mobile = localStorage.getItem("mobile");
-      mobileDisplay.innerText = mobile ? "📱 " + mobile : "📱 Not logged in";
+     let mobile = localStorage.getItem("mobile");
+let name = localStorage.getItem("name");
+
+if (mobile && name) {
+  mobileDisplay.innerText = "👤 " + name + "  |  📱 " + mobile;
+} else if (mobile) {
+  mobileDisplay.innerText = "📱 " + mobile;
+} else {
+  mobileDisplay.innerText = "📱 Not logged in";
+}
+
 
       try {
         // ✅ Fetch attempted chapters for this mobile
@@ -195,5 +211,3 @@
   </script>
 </body>
 </html>
-
-
