@@ -159,7 +159,11 @@
           return;
         }
 
-        nameEl.textContent = data.data.name || "Student";
+        const studentName = data.data.name || "Student";
+nameEl.textContent = studentName;
+
+// save name for next pages
+localStorage.setItem("name", studentName); || "Student";
 
         const cards1 = data.data.cards1 || [];
         const cards2 = data.data.cards2 || [];
@@ -190,5 +194,6 @@
 
 </body>
 </html>
+
 
 
