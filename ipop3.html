@@ -45,12 +45,17 @@
       text-align:center;
     }
     .grid {
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      width:100%;
-      max-width:480px;
-    }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* side by side */
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+}
+ @media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
     .card {
       background: var(--card);
       border-radius:20px;
@@ -124,7 +129,7 @@
   </div>
 
   <div class="grid" id="sheetCards" style="display:none;"></div>
-  <button class="back-btn" onclick="location.href='ipopro.html'">⬅ Back</button>
+  <button class="back-btn" onclick="location.href='dash.html'">⬅ Back</button>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGfz1f2-iGYsXmrS8X7fvOSRBFJyCAUtT86zBu15OzPzw4Th6nlmHUJ4KxBoBJkIim/exec";
