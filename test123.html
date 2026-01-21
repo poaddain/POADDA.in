@@ -164,8 +164,14 @@
         const cards1 = data.data.cards1 || [];
         const cards2 = data.data.cards2 || [];
 
-        if (cards1.length === 0) container1.innerHTML = "<p>No items available.</p>";
-        if (cards2.length > 0) glass2.style.display = "block"; // show only if F–H present
+      const allCards = data.data.cards1 || [];
+
+// First block: C, D, E, F
+const cards1 = allCards.filter(c => ["C","D","E","F"].includes(c));
+
+// Second block: I, J, K
+const cards2 = allCards.filter(c => ["I","J","K"].includes(c));
+
 
         const makeCard = (title, target) => {
           const card = document.createElement("div");
@@ -190,3 +196,4 @@
 
 </body>
 </html>
+
