@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POAdda Registration</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  padding:20px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#f9d423,#ff4e50);
+}
+
+form{
+  background:#fff;
+  border-radius:20px;
+  padding:25px;
+  width:100%;
+  max-width:430px;
+  box-shadow:0 15px 40px rgba(0,0,0,1);
+}
+
+.form-date{
+  text-align:center;
+  font-size:13px;
+  color:#000;
+  margin-bottom:6px;
+  font-weight:600;
+}
+.form-title{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
+  color:#333;
+}
+
+label{font-weight:600;margin-top:12px;display:block;}
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+.password-wrapper{position:relative;}
+.toggle-password{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:22px;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  background:linear-gradient(135deg,#4facfe,#00f2fe);
+  cursor:pointer;
+}
+
+button.secondary{
+  background:linear-gradient(135deg,#6c757d,#495057);
+}
+
+.notifier{
+  position:fixed;
+  top:-80px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#333;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  opacity:0;
+  transition:.6s;
+  z-index:9999;
+}
+.notifier.show{top:20px;opacity:1;}
+.notifier.success{background:rgba(40,167,69,.9);}
+.notifier.warning{background:rgba(255,193,7,.9);color:#000;}
+
+.welcome-box{
+  display:none;
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  max-width:430px;
+  width:100%;
+  box-shadow:0 15px 40px rgba(0,0,0,.6);
+}
+
+.welcome-actions{
+  margin-top:25px;
+  display:flex;
+  gap:12px;
+}
+
+.welcome-actions button{
+  flex:1;
+}
+</style>
+</head>
+
+<body>
+
+<form id="signupForm">
+
+  <div class="form-date">
+    Date: <span id="currentDate"></span>
+  </div>
+  <div class="form-title">POADDA REGISTRATION FORM</div>
+
+  <label>Name</label>
+  <input type="text" name="name" placeholder="Enter your full name" required>
+
+  <label>Mobile No.</label>
+  <input type="text" name="mobile" maxlength="10" pattern="^[0-9]{10}$" 
+	placeholder="Enter your 10 digit mobile number"
+	required>
+
+  <!-- ✅ Create Password -->
+  <label>Create Password</label>
+  <div class="password-wrapper">
+  <input type="password"
+       id="password"
+       name="password"
+       placeholder="Create your password (Alphanumeric)"
+       pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$"
+       title="Password must contain letters and numbers only"
+       required>
+
+	   minimum 6 character
+    <i class="fa-solid fa-eye toggle-password"
+       onclick="togglePassword('password')"></i>
+  </div>
+
+  <!-- ✅ Confirm Password (auto hide + view button) -->
+  <label>Confirm Password</label>
+  <div class="password-wrapper">
+    <input type="password"
+           id="confirmPassword"
+           name="confirmPassword"
+           placeholder="Re-enter your password"
+           required>
+    <i class="fa-solid fa-eye toggle-password"
+       onclick="togglePassword('confirmPassword')"></i>
+  </div>
+
+  <label>Exam</label>
+  <select name="exam" required>
+    <option value="">Select</option>
+    <option value="IPO">IPO</option>
+    <option value="PA/SA">PA/SA</option>
+    <option value="POSTMAN">POSTMAN</option>
+    <option value="MTS">MTS</option>
+  </select>
+
+  <button type="submit" id="submitBtn">
+    <span id="btnText">Submit</span>
+  </button>
+  <button type="button" class="secondary" onclick="goBack()">Back</button>
+
+</form>
+
+<div class="welcome-box" id="welcomeBox">
+  <h3 id="welcomeText"></h3>
+  <div id="welcomeDetails"></div>
+
+  <div class="welcome-actions">
+    <button type="button" onclick="goToLogin()">Go to Login</button>
+    <button type="button" class="secondary" onclick="goBack()">Back</button>
+  </div>
+</div>
+
+<div class="notifier" id="notifier"></div>
+
+<script>
+document.getElementById("currentDate").innerText =
+  new Date().toLocaleDateString();
+
+function togglePassword(id){
+  const i=document.getElementById(id);
+  i.type=i.type==="password"?"text":"password";
+}
+
+function goToLogin(){
+  window.location.href="login.html";
+}
+
+function goBack(){
+  window.location.href="user.html";
+}
+</script>
+
+</body>
+</html>
