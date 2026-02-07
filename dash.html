@@ -239,6 +239,7 @@ background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center;
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbxUsrfTteoJMK5j5qnEspa_ZKxS1dpp63o_WboQl48m22o_CBJ8CbzpLCXXG8uKaGOw-w/exec";
 const mobile=localStorage.getItem("mobile");
+const examName = localStorage.getItem("examName"); 
 
 if(!mobile) location.replace("login.html");
 history.pushState(null,null,location.href);
@@ -302,7 +303,14 @@ function setPerf(p,o){
 }
 
 function closeModal(){plusModal.style.display="none";}
-function logout(){localStorage.clear();location.replace("login.html");}
+function logout(){
+  if (confirm("Are you sure you want to logout?")) {
+    localStorage.clear();
+    location.replace("login.html");
+  }
+}
+
+
 </script>
 
 </body>
