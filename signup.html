@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>POAdda Registration</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -13,37 +14,41 @@ body{
   padding:20px;
   min-height:100vh;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
   background:linear-gradient(135deg,#f9d423,#ff4e50);
 }
 
+.container{
+  width:100%;
+  max-width:520px; /* ⬅ increased width */
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:10px;
+}
+.logo img{
+  max-width:140px;
+}
+
 form{
   background:#fff;
+  padding:28px;
   border-radius:20px;
-  padding:25px;
-  width:100%;
-  max-width:430px;
-  box-shadow:0 15px 40px rgba(0,0,0,1);
+  box-shadow:0 15px 40px rgba(0,0,0,0.4);
 }
 
-.form-date{
-  text-align:center;
-  font-size:13px;
-  color:#000;
-  margin-bottom:6px;
+h2,h4{text-align:center;margin:0}
+h2{color:#fff}
+h4{color:#eee;margin-bottom:20px}
+
+label{
   font-weight:600;
-}
-.form-title{
-  text-align:center;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:15px;
-  color:#333;
+  margin-top:12px;
+  display:block;
 }
 
-label{font-weight:600;margin-top:12px;display:block;}
 input,select{
   width:100%;
   padding:12px;
@@ -53,30 +58,41 @@ input,select{
   font-size:14px;
 }
 
-.password-wrapper{position:relative;}
-.toggle-password{
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-  cursor:pointer;
+.hint{
+  font-size:12px;
+  color:#666;
+  margin-top:4px;
 }
 
 button{
   width:100%;
   padding:14px;
-  margin-top:22px;
+  margin-top:18px;
   border:none;
   border-radius:14px;
   font-size:16px;
   font-weight:bold;
+  cursor:pointer;
   color:#fff;
   background:linear-gradient(135deg,#4facfe,#00f2fe);
-  cursor:pointer;
+  position:relative;
 }
 
-button.secondary{
-  background:linear-gradient(135deg,#6c757d,#495057);
+button:disabled{
+  opacity:0.7;
+  cursor:not-allowed;
+}
+
+.spinner{
+  display:none;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.back-btn{
+  background:#6c757d;
 }
 
 .notifier{
@@ -84,131 +100,212 @@ button.secondary{
   top:-80px;
   left:50%;
   transform:translateX(-50%);
-  background:#333;
-  color:#fff;
   padding:12px 20px;
   border-radius:10px;
   font-weight:bold;
-  opacity:0;
-  transition:.6s;
+  color:#fff;
+  transition:.5s;
   z-index:9999;
 }
-.notifier.show{top:20px;opacity:1;}
-.notifier.success{background:rgba(40,167,69,.9);}
-.notifier.warning{background:rgba(255,193,7,.9);color:#000;}
+.notifier.show{top:20px}
+.success{background:#28a745}
+.warning{background:#ffc107;color:#000}
 
-.welcome-box{
+#successView{
   display:none;
-  background:#fff;
-  padding:30px;
-  border-radius:20px;
   text-align:center;
-  max-width:430px;
-  width:100%;
-  box-shadow:0 15px 40px rgba(0,0,0,.6);
+  color:#fff;
 }
 
-.welcome-actions{
-  margin-top:25px;
-  display:flex;
-  gap:12px;
+</style>
+<style>
+.password-wrap{
+  position:relative;
 }
 
-.welcome-actions button{
-  flex:1;
+.password-wrap i{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  color:#666;
 }
 </style>
+
 </head>
 
 <body>
 
-<form id="signupForm">
+<div class="container">
 
-  <div class="form-date">
-    Date: <span id="currentDate"></span>
-  </div>
-  <div class="form-title">POADDA REGISTRATION FORM</div>
-
-  <label>Name</label>
-  <input type="text" name="name" placeholder="Enter your full name" required>
-
-  <label>Mobile No.</label>
-  <input type="text" name="mobile" maxlength="10" pattern="^[0-9]{10}$" 
-	placeholder="Enter your 10 digit mobile number"
-	required>
-
-  <!-- ✅ Create Password -->
-  <label>Create Password</label>
-  <div class="password-wrapper">
-  <input type="password"
-       id="password"
-       name="password"
-       placeholder="Create your password (Alphanumeric)"
-       pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$"
-       title="Password must contain letters and numbers only"
-       required>
-
-	   minimum 6 character
-    <i class="fa-solid fa-eye toggle-password"
-       onclick="togglePassword('password')"></i>
+  <div class="logo">
+    <img src="logo.png" alt="POADDA Logo">
   </div>
 
-  <!-- ✅ Confirm Password (auto hide + view button) -->
-  <label>Confirm Password</label>
-  <div class="password-wrapper">
-    <input type="password"
-           id="confirmPassword"
-           name="confirmPassword"
-           placeholder="Re-enter your password"
-           required>
-    <i class="fa-solid fa-eye toggle-password"
-       onclick="togglePassword('confirmPassword')"></i>
+  <h2><i class="fa fa-user-plus"></i> POAdda Registration</h2>
+  <h4>A journey towards excellence</h4>
+
+  <!-- SUCCESS VIEW -->
+  <div id="successView">
+    <h3>Welcome to POADDA 🎉</h3>
+    <p><b>Name:</b> <span id="sName"></span></p>
+    <p><b>Mobile:</b> <span id="sMobile"></span></p>
+    <p><b>Password:</b> <span id="sPassword"></span></p>
+
+    <button onclick="location.href='login.html'">Go to Login</button>
+    <button onclick="location.href='home.html'" style="margin-top:10px;">Go to Home</button>
   </div>
 
-  <label>Exam</label>
-  <select name="exam" required>
-    <option value="">Select</option>
-    <option value="IPO">IPO</option>
-    <option value="PA/SA">PA/SA</option>
-    <option value="POSTMAN">POSTMAN</option>
-    <option value="MTS">MTS</option>
-  </select>
+  <!-- FORM -->
+  <form id="signupForm">
 
-  <button type="submit" id="submitBtn">
-    <span id="btnText">Submit</span>
-  </button>
-  <button type="button" class="secondary" onclick="goBack()">Back</button>
+    <label>Full Name</label>
+    <input type="text" name="name" required>
+    <div class="hint">Enter your full name</div>
 
-</form>
+    <label>Mobile Number</label>
+    <input id="mobile" type="text" name="mobile" maxlength="10" required>
+    <div class="hint">10-digit mobile number only</div>
 
-<div class="welcome-box" id="welcomeBox">
-  <h3 id="welcomeText"></h3>
-  <div id="welcomeDetails"></div>
+   <label>Password</label>
+<div class="password-wrap">
+  <input type="password" id="password" name="password" required>
+  <i class="fa fa-eye" onclick="togglePassword('password',this)"></i>
+</div>
+<div class="hint">Minimum 6 characters, letters & numbers</div>
 
-  <div class="welcome-actions">
-    <button type="button" onclick="goToLogin()">Go to Login</button>
-    <button type="button" class="secondary" onclick="goBack()">Back</button>
-  </div>
+<label>Confirm Password</label>
+<div class="password-wrap">
+  <input type="password" id="confirmPassword" name="confirmPassword" required>
+  <i class="fa fa-eye" onclick="togglePassword('confirmPassword',this)"></i>
 </div>
 
-<div class="notifier" id="notifier"></div>
+
+    <label>Exam</label>
+    <select name="exam" required>
+      <option value="">Select Exam</option>
+      <option>IPO</option>
+      <option>PA/SA</option>
+      <option>POSTMAN</option>
+      <option>MTS</option>
+    </select>
+
+    <button id="submitBtn" type="submit">
+      <span id="btnText">Submit</span>
+      <span class="spinner" id="btnSpinner">
+        <i class="fa fa-spinner fa-spin"></i>
+      </span>
+    </button>
+
+    <button type="button" class="back-btn" onclick="location.href='user.html'">Back</button>
+
+  </form>
+</div>
+
+<div id="notifier" class="notifier"></div>
 
 <script>
-document.getElementById("currentDate").innerText =
-  new Date().toLocaleDateString();
-
-function togglePassword(id){
-  const i=document.getElementById(id);
-  i.type=i.type==="password"?"text":"password";
+function togglePassword(id, icon){
+  const input = document.getElementById(id);
+  if(input.type === "password"){
+    input.type = "text";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  }else{
+    input.type = "password";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  }
 }
 
-function goToLogin(){
-  window.location.href="login.html";
+const form = document.getElementById("signupForm");
+const notifier = document.getElementById("notifier");
+const mobileInput = document.getElementById("mobile");
+const submitBtn = document.getElementById("submitBtn");
+const spinner = document.getElementById("btnSpinner");
+const btnText = document.getElementById("btnText");
+
+function showNotifier(msg,type){
+  notifier.textContent = msg;
+  notifier.className = `notifier show ${type}`;
+  setTimeout(()=>notifier.classList.remove("show"),2500);
 }
 
-function goBack(){
-  window.location.href="user.html";
+mobileInput.addEventListener("input",e=>{
+  e.target.value = e.target.value.replace(/\D/g,'').slice(0,10);
+});
+
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+
+  if(data.mobile.length !== 10){
+    showNotifier("Mobile number must be exactly 10 digits","warning");
+    return;
+  }
+
+  if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(data.password)){
+    showNotifier("Password must be alphanumeric (min 6 characters)","warning");
+    return;
+  }
+
+  if(data.password !== data.confirmPassword){
+    showNotifier("Passwords do not match","warning");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  btnText.style.visibility="hidden";
+  spinner.style.display="block";
+
+  try{
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbxcp5wXF3RnA5pv0FTlX7Bkad6s4xmXuLY4WhQk3xz7WJhM4-2Mpzi-rygF6TLoOEos/exec",
+      {method:"POST",body:new URLSearchParams({...data,action:"signup"})}
+    );
+
+    const result = await res.json();
+
+    spinner.style.display="none";
+    btnText.style.visibility="visible";
+    submitBtn.disabled = false;
+
+    // 🔴 DUPLICATE MOBILE + EXAM HANDLING (ROBUST)
+if (
+  result.status === "exists" ||
+  result.status === "duplicate" ||
+  result.exists === true ||
+  (result.status === "error" && result.message?.toLowerCase().includes("exist"))
+) {
+  showNotifier(
+    "This mobile number is already registered for the selected exam",
+    "warning"
+  );
+  return;
 }
+
+
+    if(result.status === "success"){
+      showNotifier("Registration Successful ✅","success");
+
+      document.getElementById("sName").innerText = data.name;
+      document.getElementById("sMobile").innerText = data.mobile;
+      document.getElementById("sPassword").innerText = data.password;
+
+      setTimeout(()=>{
+        form.style.display="none";
+        document.getElementById("successView").style.display="block";
+      },1200);
+    }
+
+  }catch{
+    spinner.style.display="none";
+    btnText.style.visibility="visible";
+    submitBtn.disabled = false;
+    showNotifier("Network error","warning");
+  }
+});
 </script>
 
 </body>

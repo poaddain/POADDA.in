@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Materials</title>
+<title>Study Materials - IPO</title>
 
 <style>
 body {
@@ -49,7 +49,6 @@ header {
     background: linear-gradient(180deg, #fff3b0, #ffe082);
     padding: 30px 14px;
     overflow-y: auto;
-    position: relative;
 }
 .paper {
     margin-bottom: 14px;
@@ -95,7 +94,6 @@ header {
 .right {
     width: 75%;
     padding: 20px;
-    position: relative;
 }
 iframe {
     width: 100%;
@@ -113,32 +111,6 @@ iframe {
     border-radius: 6px;
     text-decoration: none;
 }
-
-/* ===== SPINNERS ===== */
-.panel-loader {
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-}
-.panel-loader.hidden {
-    display: none;
-}
-.spinner {
-    width: 42px;
-    height: 42px;
-    border: 5px solid #ddd;
-    border-top: 5px solid #0056d2;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
 @media (max-width: 768px) {
     .container { flex-direction: column; }
     .left, .right { width: 100%; }
@@ -156,28 +128,16 @@ iframe {
         </div>
         <div class="user-info" id="userInfo"></div>
     </div>
-    <h2 id="welcome">Welcome to the Study Materials for MTS 👋</h2>
+    <h2 id="welcome">Welcome to the IPO Study Materials 👋</h2>
 </header>
 
 <div class="container">
     <div class="left" id="paperList">
-
-        <!-- LEFT PANEL LOADER -->
-        <div id="leftLoader" class="panel-loader">
-            <div class="spinner"></div>
-        </div>
-
         <a href="dash.html" class="back-btn">← Back to Profile</a>
     </div>
 
     <div class="right">
         <h3 id="pdfTitle">Select a chapter</h3>
-
-        <!-- RIGHT PANEL LOADER -->
-        <div id="pdfLoader" class="panel-loader hidden">
-            <div class="spinner"></div>
-        </div>
-
         <div id="pdfSection" style="display:none;">
             <a id="downloadBtn" class="download" download>Download PDF</a>
             <iframe id="pdfViewer"></iframe>
@@ -187,12 +147,6 @@ iframe {
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzaQjKzSmOPHwQqTIjj8w-urAT6XhiQv6jpUIVVY0LOr0dgoM_5xqDuq5puzi29Ns5UaQ/exec";
-
-const leftLoader = document.getElementById("leftLoader");
-const pdfLoader = document.getElementById("pdfLoader");
-const pdfViewer = document.getElementById("pdfViewer");
-const pdfSection = document.getElementById("pdfSection");
-const downloadBtn = document.getElementById("downloadBtn");
 
 /* USER INFO */
 (() => {
@@ -206,13 +160,12 @@ const downloadBtn = document.getElementById("downloadBtn");
          ${localStorage.getItem("userMobile") || ""}`;
 })();
 
-/* LOAD CHAPTERS */
+/* LOAD DATA */
 fetch(SCRIPT_URL)
 .then(r => r.json())
 .then(r => {
-    leftLoader.classList.add("hidden");
-
     const data = r.data;
+
     const columns = [
         { chapter: 0, pdf: 1 },
         { chapter: 2, pdf: 3 },
@@ -250,25 +203,25 @@ fetch(SCRIPT_URL)
         for (let i = 1; i < data.length; i++) {
             const name = data[i][col.chapter];
             const link = data[i][col.pdf];
+
             if (name) {
                 const t = document.createElement("div");
                 t.className = "topic";
                 t.innerText = name;
-                if (link) t.onclick = () => openPDF(link);
+                if (link) {
+                    t.onclick = () => openPDF(link);
+                }
                 content.appendChild(t);
             }
         }
 
         paper.append(header, content);
-        paperList.insertBefore(paper, document.querySelector(".back-btn"));
+        document.getElementById("paperList")
+            .insertBefore(paper, document.querySelector(".back-btn"));
     });
-})
-.catch(() => {
-    leftLoader.classList.add("hidden");
-    alert("Failed to load chapters");
 });
 
-/* OPEN PDF WITH LOADER */
+/* OPEN GOOGLE DRIVE PDF */
 function openPDF(value) {
     let fileId = value.trim();
 
@@ -280,10 +233,6 @@ function openPDF(value) {
     }
 
     pdfSection.style.display = "block";
-    pdfLoader.classList.remove("hidden");
-
-    pdfViewer.onload = () => pdfLoader.classList.add("hidden");
-
     pdfViewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
     downloadBtn.href = `https://drive.google.com/file/d/${fileId}/view`;
 }
